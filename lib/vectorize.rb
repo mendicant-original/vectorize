@@ -1,5 +1,8 @@
 require "vectorize/version"
 
-module Vectorize
-  # Your code goes here...
-end
+require "ffi"
+
+require "vectorize/cairo_wrapper"
+
+require "vectorize/surfaces/surface"
+require "vectorize/surfaces/image"
