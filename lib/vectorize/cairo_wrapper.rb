@@ -21,5 +21,8 @@ module Vectorize
     # PNG surfaces
     attach_function :cairo_image_surface_create_from_png, [:string], :pointer
     attach_function :cairo_surface_write_to_png, [:pointer, :string], :uint8
+
+    # SVG surfaces
+    attach_function :cairo_svg_surface_create, [:string, :double, :double], :pointer
   end
 end
