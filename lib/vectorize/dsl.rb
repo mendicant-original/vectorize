@@ -5,7 +5,7 @@ module Vectorize
   #   v.line_to(175, 175)
   #   v.stroke
   #
-  #   v.save_as "foo.png"
+  #   v.save_as_png "foo.png"
   # end
   def self.draw(width, height)
     surface = Surfaces::Image.new(width, height)
@@ -31,7 +31,7 @@ module Vectorize
       CairoWrapper.cairo_stroke(@surface.context)
     end
 
-    def save_as(filename)
+    def save_as_png(filename)
       @surface.write_to_png(filename)
     end
   end
