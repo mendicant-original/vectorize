@@ -11,7 +11,11 @@ module Vectorize
     surface = Surfaces::Image.new(width, height)
     dsl     = DSL.new(surface)
 
-    yield dsl
+    begin
+      yield dsl
+    ensure
+      surface.destroy
+    end
   end
 
   class DSL
