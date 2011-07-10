@@ -14,6 +14,10 @@ module Vectorize
 
         @surface_pointer = @context_pointer = nil
       end
+
+      def write_to_png(filename)
+        CairoWrapper.cairo_surface_write_to_png(@surface_pointer, filename)
+      end
     end
   end
 end
