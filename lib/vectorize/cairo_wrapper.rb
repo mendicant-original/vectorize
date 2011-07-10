@@ -6,6 +6,8 @@ module Vectorize
 
     # Surfaces
     attach_function :cairo_create, [:pointer], :pointer
+    attach_function :cairo_destroy, [:pointer], :void
+    attach_function :cairo_surface_destroy, [:pointer], :uint8
     CAIRO_FORMAT_INVALID   = -1
     CAIRO_FORMAT_ARGB32    = 0
     CAIRO_FORMAT_RGB24     = 1
