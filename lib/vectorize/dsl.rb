@@ -8,7 +8,7 @@ module Vectorize
   #   v.save_as_png "foo.png"
   # end
   def self.draw(width, height)
-    surface = Surfaces::Image.new(width, height)
+    surface = Surface::Image.new(width, height)
     dsl     = DSL.new(surface)
 
     begin
