@@ -1,3 +1,7 @@
+require_relative "surfaces/image"
+require_relative "surfaces/png"
+require_relative "surfaces/svg"
+
 module Vectorize
   class Surface
     attr_reader :surface_pointer
