@@ -18,8 +18,7 @@ module Cairo
           name_parts.each{ |part| meth_name.gsub! part, '' }
           trim!(meth_name, "_")
           while meth_name.gsub!("__", "_");end
-          # I'm using class_eval to avoid making an unnecessary singleton, is that right?
-          class_eval "class << self; alias_method :#{meth_name}, :#{meth_symbol}; end"
+          singleton_class.send :alias_method, method_name.to_sym, method_symbol
         end
       end
     end
