@@ -9,6 +9,17 @@ module Cairo
       base.ffi_lib "/usr/X11/lib/libcairo.dylib"
     end
 
+
+    def find_lib(name)
+      # prefer the homebrew version over others
+      if Dir.exist?("/usr/local/cellar/cairo")
+        Dir["/usr/local/cellar/cairo"].sort
+      end
+
+      # no homebrew so look through the user's paths till we find it
+
+    end
+
     # remove redundancy from cairo method names
     def clean_method_names
       name_parts = self.name.downcase.split "::"

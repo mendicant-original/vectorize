@@ -1,18 +1,14 @@
-module Qix
-  def add_alias
-    # baz and bar are dynamic values
-    alias_name = "baz"
-    method_name = :bar
-    singleton_class.send :alias_method, alias_name.to_sym, method_name
-  end
+a = "1.100.4"
+b = "1.11.2"
+
+def foo(a,b)
+
+          a.split(".").each_with_index do |version, index|
+            compairison = (version.to_i <=> b.split(".")[index].to_i)
+            return compairison unless compairison == 0
+          end
+          0
 end
 
-class Foo
-  extend Qix
-  def self.bar
-  end
-  add_alias
-end
 
-puts Foo.public_methods.include? :baz
-
+puts foo(a,b)

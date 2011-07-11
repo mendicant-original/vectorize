@@ -5,8 +5,7 @@ module Cairo
     # Surfaces
     attach_function :cairo_surface_destroy, [:pointer], :uint8
 
-    # Not sure which I like better, the FFI version of enum or the constant version
-    enum :image_format, [
+   enum :image_format, [
       :invalid, -1,
       :argb32,
       :rgb24,
