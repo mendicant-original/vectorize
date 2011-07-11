@@ -3,3 +3,7 @@ $: << '.'
 
 require 'rspec'
 require 'vectorize'
+
+def path(file)
+  File.expand_path(File.join(File.dirname(file)))
+end

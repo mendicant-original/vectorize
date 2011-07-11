@@ -11,7 +11,7 @@ module Cairo
                     [:pointer], 
                     :void
     
-    clean_method_name
+    clean_method_names
   end
 
 end

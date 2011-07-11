@@ -1,0 +1,5 @@
+    def trim!(text, char, sides=[:left,:right])
+      sides.each do |side|
+        text.chomp!(char) while (side == :left ? text.first : text.last) == char
+      end
+    end
