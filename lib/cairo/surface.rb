@@ -14,14 +14,7 @@ module Cairo
       :a1,
       :rgb16_565
     ] 
-    
-    #CAIRO_FORMAT_INVALID   = -1
-    #CAIRO_FORMAT_ARGB32    = 0
-    #CAIRO_FORMAT_RGB24     = 1
-    #CAIRO_FORMAT_A8        = 2
-    #CAIRO_FORMAT_A1        = 3
-    #CAIRO_FORMAT_RGB16_565 = 4
- 
+
     # SVG surfaces
     attach_function :cairo_svg_surface_create, [:string, :double, :double], :pointer
     

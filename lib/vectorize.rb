@@ -1,4 +1,4 @@
-require_relative "cairo/cairo"
+require "cairo"
 
 require_relative "vectorize/version"
 require_relative "vectorize/surface"
