@@ -1,7 +1,7 @@
 module Cairo
 
   class Context
-    extend Cairo::FFI
+    extend FFI
 
     attach_function :cairo_create, [:pointer], :pointer
     attach_function :cairo_destroy, [:pointer], :void
