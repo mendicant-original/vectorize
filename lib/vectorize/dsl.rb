@@ -24,15 +24,15 @@ module Vectorize
     end
 
     def move_to(x, y)
-      CairoWrapper.cairo_move_to(@surface.context, x, y)
+      Cairo.cairo_move_to(@surface.context, x, y)
     end
 
     def line_to(x, y)
-      CairoWrapper.cairo_line_to(@surface.context, x, y)
+      Cairo.cairo_line_to(@surface.context, x, y)
     end
 
     def stroke
-      CairoWrapper.cairo_stroke(@surface.context)
+      Cairo.cairo_stroke(@surface.context)
     end
 
     def save_as_png(filename)
