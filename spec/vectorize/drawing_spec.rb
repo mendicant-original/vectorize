@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Vectorize::DSL do
+describe Vectorize::Drawing do
 
   context "When creating a DSL block" do
     
@@ -20,7 +20,6 @@ describe Vectorize::DSL do
       
       it "should draw a rectangle" do
         Vectorize.draw(100, 100) do |v|
-          #v.square()
         end
       end
       

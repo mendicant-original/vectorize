@@ -35,6 +35,8 @@ module Vectorize
     # type defs to make life easier when reading and writing these methods
     typedef :pointer,   :surface 
     typedef :pointer,   :context
+    typedef :pointer,   :x_pointer
+    typedef :pointer,   :y_pointer
     typedef :double,    :x
     typedef :double,    :y
     typedef :double,    :control_point_x
@@ -141,8 +143,12 @@ module Vectorize
     # Drawing
 
     # Paths
+    cairo_method :get_current_point,
+      [ :context, :x_pointer, :y_pointer ],
+      :void
+    
     cairo_method :close_path,
-      [ :context ],
+      [ :context, :x, :y ],
       :void
 
     cairo_method :move_to,
