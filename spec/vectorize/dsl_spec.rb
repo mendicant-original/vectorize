@@ -6,7 +6,7 @@ describe Vectorize::DSL do
     
     it "should accept a block of commands" do
       expect do
-        Vectorize.draw(100, 100) do
+        Vectorize.draw(100, 100) do |v|
           # do stuff
         end
       end.should_not raise_error
@@ -14,10 +14,18 @@ describe Vectorize::DSL do
     
   end
 
-  context "When creating paths" do
-   
+  context "When drawing paths" do
+
+    context "and you're drawing shapes" do
+      
+      it "should draw a rectangle" do
+        Vectorize.draw(100, 100) do |v|
+          #v.square()
+        end
+      end
+      
+    end
     
   end
-
 
 end

@@ -1,7 +1,6 @@
 module Vectorize
   # Example usage:
   # Vectorize.draw(200, 200) do |v|
-  #   v.move_to(100, 100)
   #   v.line_to(175, 175)
   #   v.stroke
   #
@@ -21,22 +20,42 @@ module Vectorize
   class DSL
     def initialize(surface)
       @surface = surface
+      @context = surface.context
     end
 
-    def move_to(x, y)
-      Cairo.cairo_move_to(@surface.context, x, y)
-    end
-
-    def line_to(x, y)
-      Cairo.cairo_line_to(@surface.context, x, y)
-    end
-
-    def stroke
-      Cairo.cairo_stroke(@surface.context)
-    end
-
+    # Surfaces
     def save_as_png(filename)
       @surface.write_to_png(filename)
     end
+
+    # Drawing
+
+    def move_to(x, y)
+      Cairo.move_to(@context, x, y)
+    end
+
+    def move_relative(x, y)
+      Cairo.rel_move_to(@context, x, y)
+    end
+
+    def line_to(x, y)
+      Cairo.line_to(@context, x, y)
+    end
+
+    def line_relative(x, y)
+      Cairo.rel_line_to(@context, x, y)
+    end
+
+    def close_path
+      Cairo.close_path(@context)
+    end
+    
+    def stroke
+      Cairo.stroke(@context)
+    end
+
+    
+
   end
+
 end

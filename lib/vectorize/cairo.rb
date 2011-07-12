@@ -22,6 +22,7 @@ module Vectorize
       ENV["PATH"].split(":").each do |path|
         return "#{path}/../#{lib}" if File.exist?("#{path}/../#{lib}")
       end
+      
       raise Exception, "Unable to locate Cairo library"
     end
 
@@ -31,110 +32,155 @@ module Vectorize
       attach_function method_name, "cairo_#{method_name}", arguments, return_type
     end
 
-    # Surfaces
-    cairo_method :surface_destroy,
-      [:pointer],
-      :uint8
+    # type defs to make life easier when reading and writing these methods
+    typedef :pointer,   :surface 
+    typedef :pointer,   :context
+    typedef :double,    :x
+    typedef :double,    :y
+    typedef :double,    :control_point_x
+    typedef :double,    :control_point_y
+    typedef :double,    :to_x
+    typedef :double,    :to_y
+    typedef :int,       :width
+    typedef :int,       :height
+    typedef :double,    :width_double
+    typedef :double,    :height_double
+    typedef :string,    :filename
+    typedef :double,    :radius
+    typedef :double,    :angle_start
+    typedef :double,    :angle_end
+    
+    # enums
 
     enum :image_format, [
-      :invalid, -1,
-      :argb32,
-      :rgb24,
-      :a8,
-      :a1,
-      :rgb16_565
+      :INVALID, -1,
+      :ARGB32,
+      :RGB234,
+      :A8,
+      :A1,
+      :RGB16_565
     ]
+
+    enum :status, [
+        :SUCCESS, 0,
+        
+        :NO_MEMORY,
+        :INVALID_RESTORE,
+        :INVALID_POP_GROUP,
+        :NO_CURRENT_POINT,
+        :INVALID_MATRIX,
+        :INVALID_STATUS,
+        :NULL_POINTER,
+        :INVALID_STRING,
+        :INVALID_PATH_DATA,
+        :READ_ERROR,
+        :WRITE_ERROR,
+        :SURFACE_FINISHED,
+        :SURFACE_TYPE_MISMATCH,
+        :PATTERN_TYPE_MISMATCH,
+        :INVALID_CONTENT,
+        :INVALID_FORMAT,
+        :INVALID_VISUAL,
+        :FILE_NOT_FOUND,
+        :INVALID_DASH,
+        :INVALID_DSC_COMMENT,
+        :INVALID_INDEX,
+        :CLIP_NOT_REPRESENTABLE,
+        :TEMP_FILE_ERROR,
+        :INVALID_STRIDE,
+        :FONT_TYPE_MISMATCH,
+        :USER_FONT_IMMUTABLE,
+        :USER_FONT_ERROR,
+        :NEGATIVE_COUNT,
+        :INVALID_CLUSTERS,
+        :INVALID_SLANT,
+        :INVALID_WEIGHT,
+        :INVALID_SIZE,
+        :USER_FONT_NOT_IMPLEMENTED,
+        :DEVICE_TYPE_MISMATCH,
+        :DEVICE_ERROR,
+
+        :LAST_STATUS
+    ]
+
+
+    # Surfaces
+    cairo_method :surface_destroy,
+      [:surface],
+      :status
 
     # SVG surfaces
     cairo_method :svg_surface_create,
-      [:string, :double, :double],
-      :pointer
+      [:filename, :width_double, :height_double],
+      :surface
 
     # PNG surfaces
     cairo_method :image_surface_create_from_png,
-      [:string],
-      :pointer
+      [:filename],
+      :surface
 
     cairo_method :surface_write_to_png,
-      [:pointer, :string],
-      :uint8
+      [:surface, :filename],
+      :status
 
     # Image surfaces
     cairo_method :image_surface_create,
-      [:image_format, :int, :int],
-      :pointer
+      [:image_format, :width, :height],
+      :surface
 
 
     # Contexts
     cairo_method :create,
-      [:pointer],
-      :pointer
+      [:surface],
+      :context
 
     cairo_method :destroy,
-      [:pointer],
+      [:context],
       :void
 
     # Drawing
 
     # Paths
-    cairo_method :new_path,
-      [ :pointer ],
-      :void
-
-    cairo_method :path_destroy,
-      [ :pointer ],
-      :void
-
-    cairo_method :copy_path,
-      [ :pointer ],
-      :pointer
-
-    cairo_method :append_path,
-      [ :pointer, :pointer ],
-      :void
-
     cairo_method :close_path,
-      [ :pointer ],
+      [ :context ],
       :void
 
     cairo_method :move_to,
-      [ :pointer, :double, :double ],
+      [ :context, :x, :y ],
       :void
 
     cairo_method :rel_move_to,
-      [ :pointer, :double, :double ],
+      [ :context, :x, :y ],
       :void
 
     cairo_method :line_to,
-      [ :pointer, :double, :double ],
+      [ :context, :x, :y ],
       :void
 
     cairo_method :rel_line_to,
-      [ :pointer, :double, :double ],
+      [ :context, :x, :y ],
       :void
 
+    # creates an arc centered at x,y drawn with :radius from angle_start to angle_end
     cairo_method :arc,
-      [ :pointer, :double, :double, :double, :double, :double ],
+      [ :context, :x, :y, :radius, :angle_start, :angle_end ],
       :void
 
+    # draws the curve counter clockwise from start to end
     cairo_method :arc_negative,
-      [ :pointer, :double, :double, :double, :double, :double ],
+      [ :context, :x, :y, :radius, :angle_start, :angle_end ],
       :void
 
     cairo_method :curve_to,
-      [ :pointer, :double, :double, :double, :double, :double, :double ],
+      [ :context, :control_point_x, :control_point_y, :control_point_x, :control_point_y, :to_x, :to_y ],
       :void
 
     cairo_method :rel_curve_to,
-      [ :pointer, :double, :double, :double, :double, :double, :double ],
+    [ :context, :control_point_x, :control_point_y, :control_point_x, :control_point_y, :to_x, :to_y ],
       :void
 
     cairo_method :rectangle,
-      [ :pointer, :double, :double, :double, :double ],
-      :void
-
-    cairo_method :text_path,
-      [ :pointer, :string ],
+      [ :context, :x, :y, :width_double, :height_double ],
       :void
 
   end
