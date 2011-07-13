@@ -1,3 +1,5 @@
+require "forwardable"
+
 module Vectorize
   # Example usage:
   # Vectorize.draw(200, 200) do |v|
@@ -19,39 +21,18 @@ module Vectorize
   end
 
   class Drawing
-    
+    extend Forwardable
+
+    def_delegators :@path, *Path.instance_methods(false)
+
     def initialize(surface)
       @surface  = surface
-      
       @path     = Path.new(@surface.context)
-      add_object_methods(@path)
-    
     end
 
     # Surfaces
     def save_as_png(filename)
       @surface.write_to_png(filename)
     end
-
-    private
-    
-    # Why retype method names? And yes, I do want all of them.
-    def add_object_methods(object)
-      object.public_methods(false).each do |method_name|
-        self.class.class_eval do
-          if object.method(method_name).arity > 0 
-            define_method method_name do |argument_hash|
-              object.send method_name, argument_hash
-            end
-          else
-            define_method method_name do 
-              object.send method_name
-            end
-          end
-        end
-      end
-    end
-
   end
-
 end
