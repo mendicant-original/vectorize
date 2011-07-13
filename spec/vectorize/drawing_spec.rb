@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Vectorize::Drawing do
 
-  context "When creating a DSL block" do
+  context "When creating a draw block" do
     
     it "should accept a block of commands" do
       expect do
@@ -18,13 +18,29 @@ describe Vectorize::Drawing do
 
     context "and you're drawing shapes" do
       
-      # it "should draw a pentagon" do
-      #   Vectorize.draw(400, 400) do |v|
-      #     v.polygon(x: 200, y:200, size: 100, sides: 5)
-      #     v.stroke
-      #     v.save_as_png "foo.png"
-      #   end
-      # end
+      it "should draw a polygon" do
+        Vectorize.draw(400, 400) do |v|
+          v.polygon x: 200, y: 200, size: 150, sides: 7
+          v.stroke
+          v.save_as_png "tmp/polygon.png"
+        end
+      end
+      
+      it "should draw a circle" do
+        Vectorize.draw(400, 400) do |v|
+          v.circle x: 200, y: 200, radius: 150
+          v.stroke
+          v.save_as_png "tmp/circle.png"
+        end
+      end
+      
+      it "should draw a square" do
+        Vectorize.draw(400, 400) do |v|
+          v.square x: 200, y: 200, size: 150
+          v.stroke
+          v.save_as_png "tmp/square.png"
+        end
+      end
       
     end
     
