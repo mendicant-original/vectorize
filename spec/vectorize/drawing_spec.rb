@@ -18,10 +18,13 @@ describe Vectorize::Drawing do
 
     context "and you're drawing shapes" do
       
-      it "should draw a rectangle" do
-        Vectorize.draw(100, 100) do |v|
-        end
-      end
+      # it "should draw a pentagon" do
+      #   Vectorize.draw(400, 400) do |v|
+      #     v.polygon(x: 200, y:200, size: 100, sides: 5)
+      #     v.stroke
+      #     v.save_as_png "foo.png"
+      #   end
+      # end
       
     end
     

@@ -3,10 +3,7 @@ module Vectorize
   # Vectorize.draw(200, 200) do |v|
   #   v.move_to x:  20, y:  20
   #   v.line_to x: 175, y: 175
-  #
-  #   # what if we got rid of stroke when using a Drawing block?
-  #   # So all drawing takes place immediatly.
-  #   # v.stroke
+  #   v.stroke
   #
   #   v.save_as_png "foo.png"
   # end

@@ -141,6 +141,10 @@ module Vectorize
       :void
 
     # Drawing
+    
+    cairo_method :stroke,
+      [ :context],
+      :void
 
     # Paths
     cairo_method :get_current_point,
@@ -148,7 +152,7 @@ module Vectorize
       :void
     
     cairo_method :close_path,
-      [ :context, :x, :y ],
+      [ :context],
       :void
 
     cairo_method :move_to,

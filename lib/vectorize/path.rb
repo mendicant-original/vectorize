@@ -5,6 +5,10 @@ module Vectorize
     def initialize(context)
       @context = context
     end
+    
+    def stroke
+      Cairo.stroke(@context)
+    end
 
     def move_to(args)
       Cairo.move_to(@context, args[:x], args[:y])
@@ -63,13 +67,17 @@ module Vectorize
       Cairo.arc(@context, args[:x], args[:y], args[:radius], 0, 360)
     end
     
+    # create equilateral polygons
     def polygon(args)
+      x, y, size, sides = args[:x], args[:y], args[:size], args[:sides]
+      angle = (Math::PI * 2.0) / sides
+
+      move_to(x: x + size, y: y)
+      (1..sides).each do |index|
+        line_to x: (x + (size * Math.cos(angle * index))),
+                y: (y + (size * Math.sin(angle * index)))
+      end
       
-      Cairo.move_to(args[:x], args[:y] + args[:size])
-      angle = 0
-      # args[:sides].times do
-      #   
-      # end
     end
     
   end
