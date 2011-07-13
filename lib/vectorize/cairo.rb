@@ -22,7 +22,10 @@ module Vectorize
       ENV["PATH"].split(":").each do |path|
         return "#{path}/../#{lib}" if File.exist?("#{path}/../#{lib}")
       end
-      
+
+      # Linux?
+      return "/usr/lib/libcairo.so" if File.exist?("/usr/lib/libcairo.so")
+
       raise Exception, "Unable to locate Cairo library"
     end
 
