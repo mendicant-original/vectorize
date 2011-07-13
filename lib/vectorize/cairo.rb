@@ -4,32 +4,7 @@ module Vectorize
   module Cairo
     extend FFI::Library
 
-    def self.find_lib
-      lib = "lib/libcairo.dylib"
-      # prefer the newest homebrew version over others
-      if Dir.exist?(cellar = "/usr/local/cellar/cairo")
-        newest = Dir[cellar].sort do |a,b|
-          a.split(".").each_with_index do |version, index|
-            compairison = (version.to_i <=> b.split(".")[index].to_i)
-            return compairison unless compairison == 0
-          end
-          0
-        end.last
-        return "#{cellar}/#{newest}/#{lib}" if File.exist?("#{cellar}/#{newest}/#{lib}")
-      end
-
-      # no homebrew so look through the user's paths till we find it
-      ENV["PATH"].split(":").each do |path|
-        return "#{path}/../#{lib}" if File.exist?("#{path}/../#{lib}")
-      end
-
-      # Linux?
-      return "/usr/lib/libcairo.so" if File.exist?("/usr/lib/libcairo.so")
-
-      raise Exception, "Unable to locate Cairo library"
-    end
-
-    ffi_lib find_lib
+    ffi_lib ENV["CAIRO_LIB"] || "cairo"
 
     def self.cairo_method(method_name, arguments, return_type)
       attach_function method_name, "cairo_#{method_name}", arguments, return_type
