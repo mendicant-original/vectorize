@@ -79,6 +79,20 @@ module Vectorize
       end
       
     end
+
+    # Fills
+
+    def source_color(args)
+      if args[:a]
+        Cairo.set_source_rgba(@context, args[:r], args[:g], args[:b], args[:a])
+      else
+        Cairo.set_source_rgb(@context, args[:r], args[:g], args[:b])
+      end
+    end
+
+    def fill
+      Cairo.fill(@context)
+    end
     
   end
   

@@ -54,6 +54,10 @@ module Vectorize
     typedef :double,    :radius
     typedef :double,    :angle_start
     typedef :double,    :angle_end
+    typedef :double,    :red
+    typedef :double,    :green
+    typedef :double,    :blue
+    typedef :double,    :alpha
     
     # enums
 
@@ -194,6 +198,18 @@ module Vectorize
 
     cairo_method :rectangle,
       [ :context, :x, :y, :width_double, :height_double ],
+      :void
+
+    cairo_method :set_source_rgba,
+      [ :context, :red, :green, :blue, :alpha ],
+      :void
+
+    cairo_method :set_source_rgb,
+      [ :context, :red, :green, :blue ],
+      :void
+
+    cairo_method :fill,
+      [ :context ],
       :void
 
   end
