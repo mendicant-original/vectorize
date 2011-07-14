@@ -2,19 +2,29 @@ require "forwardable"
 
 module Vectorize
   # Example usage:
-  # Vectorize.draw(200, 200) do |v|
+  # Vectorize.draw(width: 200, height: 200) do |v|
   #   v.move_to x:  20, y:  20
   #   v.line_to x: 175, y: 175
   #   v.stroke
   #
   #   v.save_as_png "foo.png"
   # end
-  def self.draw(width, height)
-    surface = Surface::Image.new(width, height)
-    dsl     = Drawing.new(surface)
-    
+  #
+  # Vectorize.draw(from_png: "/tmp/foo.png") do |v|
+  #   # ...
+  # end
+  def self.draw(options)
+    if options[:width] and options[:height]
+      surface = Surface::Image.new(options[:width], options[:height])
+    elsif options[:from_png]
+      surface = Surface::PNG.new(options[:from_png])
+    else
+      raise ArgumentError, "must specify :width and :height or :from_png to create drawing surface"
+    end
+
+    drawing = Drawing.new(surface)
     begin
-      yield dsl
+      yield drawing
     ensure
       surface.destroy
     end

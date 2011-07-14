@@ -6,7 +6,7 @@ describe Vectorize::Drawing do
     
     it "should accept a block of commands" do
       expect do
-        Vectorize.draw(100, 100) do |v|
+        Vectorize.draw(width: 100, height: 100) do |v|
           # do stuff
         end
       end.should_not raise_error
@@ -19,7 +19,7 @@ describe Vectorize::Drawing do
     context "and you're drawing shapes" do
       
       it "should draw a polygon" do
-        Vectorize.draw(400, 400) do |v|
+        Vectorize.draw(width: 400, height: 400) do |v|
           v.polygon x: 200, y: 200, size: 150, sides: 7
           v.stroke
           v.save_as_png "tmp/polygon.png"
@@ -27,7 +27,7 @@ describe Vectorize::Drawing do
       end
       
       it "should draw a circle" do
-        Vectorize.draw(400, 400) do |v|
+        Vectorize.draw(width: 400, height: 400) do |v|
           v.circle x: 200, y: 200, radius: 150
           v.stroke
           v.save_as_png "tmp/circle.png"
@@ -35,7 +35,7 @@ describe Vectorize::Drawing do
       end
       
       it "should draw a square" do
-        Vectorize.draw(400, 400) do |v|
+        Vectorize.draw(width: 400, height: 400) do |v|
           v.square x: 200, y: 200, size: 150
           v.stroke
           v.save_as_png "tmp/square.png"
