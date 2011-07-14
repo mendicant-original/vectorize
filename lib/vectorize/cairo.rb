@@ -107,6 +107,15 @@ module Vectorize
       [:surface, :filename],
       :status
 
+    # PDF surfaces
+    cairo_method :pdf_surface_create,
+      [:filename, :width_double, :height_double],
+      :surface
+
+    cairo_method :show_page,
+      [:context],
+      :void
+
     # Image surfaces
     cairo_method :image_surface_create,
       [:image_format, :width, :height],

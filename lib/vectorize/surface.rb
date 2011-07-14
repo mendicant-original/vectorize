@@ -1,6 +1,7 @@
 require_relative "surfaces/image"
 require_relative "surfaces/png"
 require_relative "surfaces/svg"
+require_relative "surfaces/pdf"
 
 module Vectorize
   class Surface
