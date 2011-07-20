@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Mike Bethany", "Andy Lindeman"]
   s.email       = ["mikbe.tk@gmail.com", "alindeman@gmail.com"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{A simple wrapper and facade for the Cairo Graphics library.}
+  s.description = %q{Provides a one-to-one FFI wrapper for the Cairo Graphics library in addition to a facade to the API that greatly simplifies its usage.}
 
   s.rubyforge_project = "vectorize"
 

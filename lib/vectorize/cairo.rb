@@ -7,7 +7,10 @@ module Vectorize
     ffi_lib ENV["CAIRO_LIB"] || "cairo"
 
     def self.cairo_method(method_name, arguments, return_type)
-      attach_function method_name, "cairo_#{method_name}", arguments, return_type
+      attach_function method_name, 
+        "cairo_#{method_name}", 
+        arguments, 
+        return_type
     end
 
     # type defs to make life easier when reading and writing these methods
@@ -162,7 +165,8 @@ module Vectorize
       [ :context, :x, :y ],
       :void
 
-    # creates an arc centered at x,y drawn with :radius from angle_start to angle_end
+    # creates an arc centered at x,y drawn with 
+    # :radius from angle_start to angle_end
     cairo_method :arc,
       [ :context, :x, :y, :radius, :angle_start, :angle_end ],
       :void
@@ -173,11 +177,27 @@ module Vectorize
       :void
 
     cairo_method :curve_to,
-      [ :context, :control_point_x, :control_point_y, :control_point_x, :control_point_y, :to_x, :to_y ],
+      [ 
+        :context, 
+        :control_point_x, 
+        :control_point_y, 
+        :control_point_x, 
+        :control_point_y, 
+        :to_x, 
+        :to_y 
+      ],
       :void
 
-    cairo_method :rel_curve_to,
-    [ :context, :control_point_x, :control_point_y, :control_point_x, :control_point_y, :to_x, :to_y ],
+    cairo_method  :rel_curve_to,
+      [
+        :context, 
+        :control_point_x, 
+        :control_point_y, 
+        :control_point_x, 
+        :control_point_y, 
+        :to_x, 
+        :to_y 
+      ],
       :void
 
     cairo_method :rectangle,
