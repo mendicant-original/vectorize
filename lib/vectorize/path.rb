@@ -96,7 +96,7 @@ module Vectorize
       x = FFI::MemoryPointer.new :double, 1, true
       y = FFI::MemoryPointer.new :double, 1, true
       Cairo.get_current_point(@context, x, y)
-      Point.new(x.get_double(0), y.get_double(0))
+      Vectorize.point(x.get_double(0), y.get_double(0))
     end
 
     # shapes
@@ -141,9 +141,9 @@ module Vectorize
         
       angle = (Math::PI * 2.0) / sides
 
-      move_to Point.new(x + size, y)
+      move_to Vectorize.point(x + size, y)
       (1..sides).each do |index|
-        line_to Point.new(
+        line_to Vectorize.point(
           x + (size * Math.cos(angle * index)),
           y + (size * Math.sin(angle * index))
         )

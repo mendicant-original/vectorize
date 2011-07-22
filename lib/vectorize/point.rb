@@ -16,4 +16,8 @@ module Vectorize
     
   end
 
+  def self.point(x,y)
+    Vectorize::Point.new(x,y)
+  end
+
 end
