@@ -39,6 +39,16 @@ module Vectorize
         options[:width], 
         options[:height]
       )
+    elsif options[:formats].include?(:svg)
+      raise ArgumentError, 
+        "must specify a width and height for SVG output" unless
+          options[:width] and options[:height]
+          
+      Surface::SVG.new(
+        generate_filename(options[:basename], :svg), 
+        options[:width], 
+        options[:height]
+      )
     else
       
       raise ArgumentError, 
