@@ -11,7 +11,7 @@ module Vectorize
       @surface  = surface
       @path     = Path.new(@surface.context)
     end
-    
+
   end
-  
+
 end

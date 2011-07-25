@@ -42,6 +42,7 @@ Here are a few examples of just how easy it is to draw some simple shapes.
       :width    => 400, 
       :height   => 400
     }
+    
     Vectorize.draw(drawing_options) do |v|
       v.circle center: Vectorize.point(200, 200), radius: 150
       v.stroke
@@ -54,6 +55,7 @@ Here are a few examples of just how easy it is to draw some simple shapes.
       :width    => 400, 
       :height   => 400
     }
+    
     Vectorize.draw(drawing_options) do |v|
        v.square upper_left: Vectorize.point(50, 50), side_size: 300
       v.stroke
@@ -66,6 +68,7 @@ Here are a few examples of just how easy it is to draw some simple shapes.
       :width    => 400, 
       :height   => 400
     }
+    
     Vectorize.draw(drawing_options) do |v|
        v.polygon center: Vectorize.point(200, 200), radius: 150, sides: 7
        v.stroke

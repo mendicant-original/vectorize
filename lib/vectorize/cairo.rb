@@ -7,14 +7,14 @@ module Vectorize
     ffi_lib ENV["CAIRO_LIB"] || "cairo"
 
     def self.cairo_method(method_name, arguments, return_type)
-      attach_function method_name, 
-        "cairo_#{method_name}", 
-        arguments, 
+      attach_function method_name,
+        "cairo_#{method_name}",
+        arguments,
         return_type
     end
 
     # type defs to make life easier when reading and writing these methods
-    typedef :pointer,   :surface 
+    typedef :pointer,   :surface
     typedef :pointer,   :context
     typedef :pointer,   :x_pointer
     typedef :pointer,   :y_pointer
@@ -36,7 +36,7 @@ module Vectorize
     typedef :double,    :green
     typedef :double,    :blue
     typedef :double,    :alpha
-    
+
     # enums
 
     enum :image_format, [
@@ -50,7 +50,7 @@ module Vectorize
 
     enum :status, [
         :SUCCESS, 0,
-        
+
         :NO_MEMORY,
         :INVALID_RESTORE,
         :INVALID_POP_GROUP,
@@ -135,7 +135,7 @@ module Vectorize
       :void
 
     # Drawing
-    
+
     cairo_method :stroke,
       [ :context],
       :void
@@ -144,7 +144,7 @@ module Vectorize
     cairo_method :get_current_point,
       [ :context, :x_pointer, :y_pointer ],
       :void
-    
+
     cairo_method :close_path,
       [ :context],
       :void
@@ -165,7 +165,7 @@ module Vectorize
       [ :context, :x, :y ],
       :void
 
-    # creates an arc centered at x,y drawn with 
+    # creates an arc centered at x,y drawn with
     # :radius from angle_start to angle_end
     cairo_method :arc,
       [ :context, :x, :y, :radius, :angle_start, :angle_end ],
@@ -177,26 +177,26 @@ module Vectorize
       :void
 
     cairo_method :curve_to,
-      [ 
-        :context, 
-        :control_point_x, 
-        :control_point_y, 
-        :control_point_x, 
-        :control_point_y, 
-        :to_x, 
-        :to_y 
+      [
+        :context,
+        :control_point_x,
+        :control_point_y,
+        :control_point_x,
+        :control_point_y,
+        :to_x,
+        :to_y
       ],
       :void
 
     cairo_method  :rel_curve_to,
       [
-        :context, 
-        :control_point_x, 
-        :control_point_y, 
-        :control_point_x, 
-        :control_point_y, 
-        :to_x, 
-        :to_y 
+        :context,
+        :control_point_x,
+        :control_point_y,
+        :control_point_x,
+        :control_point_y,
+        :to_x,
+        :to_y
       ],
       :void
 

@@ -1,44 +1,44 @@
 module Vectorize
-  
+
   class Path
 
     def initialize(context)
       @context = context
     end
-    
+
     def stroke
       Cairo.stroke(@context)
     end
 
     def move_to(point)
       Cairo.move_to(
-        @context, 
-        point.x, 
-        point.y 
+        @context,
+        point.x,
+        point.y
       )
     end
 
     def move_relative(point)
       Cairo.rel_move_to(
-        @context, 
-        point.x, 
-        point.y 
+        @context,
+        point.x,
+        point.y
       )
     end
 
     def line_to(point)
       Cairo.line_to(
-        @context, 
-        point.x, 
-        point.y 
+        @context,
+        point.x,
+        point.y
       )
     end
 
     def line_relative(point)
       Cairo.rel_line_to(
-        @context, 
-        point.x, 
-        point.y 
+        @context,
+        point.x,
+        point.y
       )
     end
 
@@ -48,46 +48,46 @@ module Vectorize
 
     def arc(params)
       Cairo.arc(
-        @context, 
-        params[:center].x, 
-        params[:center].y, 
-        params[:radius], 
-        params[:angle_start], 
+        @context,
+        params[:center].x,
+        params[:center].y,
+        params[:radius],
+        params[:angle_start],
         params[:angle_end]
       )
     end
 
     def arc_counterclockwise(params)
       Cairo.arc_negative(
-        @context, 
-        params[:center].x, 
-        params[:center].y, 
-        params[:radius], 
-        params[:angle_start], 
+        @context,
+        params[:center].x,
+        params[:center].y,
+        params[:radius],
+        params[:angle_start],
         params[:angle_end]
       )
     end
 
     def curve(params)
       Cairo.curve_to(
-        @context, 
-        params[:point1].x, 
-        params[:point1].y, 
-        params[:point2].x, 
-        params[:point2].y, 
-        params[:center].x, 
-        params[:center].y 
+        @context,
+        params[:point1].x,
+        params[:point1].y,
+        params[:point2].x,
+        params[:point2].y,
+        params[:center].x,
+        params[:center].y
       )
     end
 
     def curve_relative(params)
       Cairo.rel_curve_to(
-        @context, 
-        params[:point1].x, 
-        params[:point1].y, 
-        params[:point2].x, 
-        params[:point2].y, 
-        params[:center].x, 
+        @context,
+        params[:point1].x,
+        params[:point1].y,
+        params[:point2].x,
+        params[:point2].y,
+        params[:center].x,
         params[:center].y
       )
     end
@@ -100,45 +100,45 @@ module Vectorize
     end
 
     # shapes
-    
+
     def rectangle(params)
       Cairo.rectangle(
-        @context, 
-        params[:upper_left].x, 
-        params[:upper_left].y, 
-        params[:width_double], 
+        @context,
+        params[:upper_left].x,
+        params[:upper_left].y,
+        params[:width_double],
         params[:height_double]
       )
     end
-    
+
     def square(params)
       Cairo.rectangle(
-        @context, 
-        params[:upper_left].x, 
-        params[:upper_left].y, 
-        params[:side_size], 
+        @context,
+        params[:upper_left].x,
+        params[:upper_left].y,
+        params[:side_size],
         params[:side_size]
       )
     end
 
     def circle(params)
       Cairo.arc(
-        @context, 
-        params[:center].x, 
-        params[:center].y, 
-        params[:radius], 
-        0, 
+        @context,
+        params[:center].x,
+        params[:center].y,
+        params[:radius],
+        0,
         360
       )
     end
-    
+
     # create equilateral polygons
     def polygon(params)
       x     = params[:center].x
       y     = params[:center].y
       size  = params[:radius]
       sides = params[:sides]
-        
+
       angle = (Math::PI * 2.0) / sides
 
       move_to Vectorize.point(x + size, y)
@@ -148,7 +148,7 @@ module Vectorize
           y + (size * Math.sin(angle * index))
         )
       end
-      
+
     end
 
     # Fills
@@ -156,17 +156,17 @@ module Vectorize
     def source_color(params)
       if params[:a]
         Cairo.set_source_rgba(
-          @context, 
-          params[:r], 
-          params[:g], 
-          params[:b], 
+          @context,
+          params[:r],
+          params[:g],
+          params[:b],
           params[:a]
         )
       else
         Cairo.set_source_rgb(
-          @context, 
-          params[:r], 
-          params[:g], 
+          @context,
+          params[:r],
+          params[:g],
           params[:b]
         )
       end
@@ -175,7 +175,7 @@ module Vectorize
     def fill
       Cairo.fill(@context)
     end
-    
+
   end
-  
+
 end
