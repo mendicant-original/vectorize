@@ -57,7 +57,7 @@ Here are a few examples of just how easy it is to draw some simple shapes.
       v.stroke
     end
 
-    # Draw a polygon and save as a PDF
+    # Draw a polygon, including a label and save as a PDF
      Vectorize.draw(
       :basename => "draw_polygon", 
       :formats  => [:pdf], 
@@ -65,6 +65,7 @@ Here are a few examples of just how easy it is to draw some simple shapes.
       :height   => 400
      ) do |v|
        v.polygon center: Vectorize.point(200, 200), radius: 150, sides: 7
+       v.write "A", :upper_right => Vectorize.point(95, 95), :size => 10, :font => "Helvetica"
        v.stroke
     end
 
@@ -135,11 +136,12 @@ Note: These need to be updated to reflect the corrections that will make them wo
     Vectorize::Cairo.destroy(layer)
     Vectorize::Cairo.surface_destroy(surface)
 
+
 For more examples see the `./examples` directory.
 
 # License
 
-Copyright (c) 2011 Andy Lindeman, Mike Bethany, Ruby Mendicant University  
+Copyright (c) 2011 Andy Lindeman, Mike Bethany, Mark Simoneau, Ruby Mendicant University  
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:  
 

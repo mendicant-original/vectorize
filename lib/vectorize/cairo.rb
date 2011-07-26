@@ -16,10 +16,23 @@ module Vectorize
     # type defs to make life easier when reading and writing these methods
     typedef :pointer,   :surface 
     typedef :pointer,   :context
+    typedef :pointer,   :matrix
+    typedef :pointer,   :font_options
+    typedef :pointer,   :font_face
+    typedef :pointer,   :scaled_font
+    typedef :pointer,   :glyphs
+    typedef :pointer,   :clusters
+    typedef :pointer,   :extents
     typedef :pointer,   :x_pointer
     typedef :pointer,   :y_pointer
     typedef :double,    :x
     typedef :double,    :y
+    typedef :double,    :xx
+    typedef :double,    :xy
+    typedef :double,    :yx
+    typedef :double,    :yy
+    typedef :double,    :x0
+    typedef :double,    :y0
     typedef :double,    :control_point_x
     typedef :double,    :control_point_y
     typedef :double,    :to_x
@@ -36,6 +49,11 @@ module Vectorize
     typedef :double,    :green
     typedef :double,    :blue
     typedef :double,    :alpha
+    typedef :double,    :size
+    typedef :string,    :font_family
+    typedef :int,       :length
+    typedef :int,       :num_glyphs
+    typedef :int,       :num_clusters
     
     # enums
 
@@ -46,6 +64,17 @@ module Vectorize
       :A8,
       :A1,
       :RGB16_565
+    ]
+
+    enum :font_slant, [
+      :NORMAL,
+      :ITALIC,
+      :OBLIQUE
+    ]
+
+    enum :font_weight, [
+      :NORMAL,
+      :BOLD
     ]
 
     enum :status, [
@@ -123,6 +152,12 @@ module Vectorize
     cairo_method :image_surface_create,
       [:image_format, :width, :height],
       :surface
+
+    # Matrices
+
+    cairo_method :matrix_init,
+      [:matrix, :xx, :yx, :xy, :yy, :x0, :y0],
+      :void
 
 
     # Contexts
@@ -214,6 +249,95 @@ module Vectorize
 
     cairo_method :fill,
       [ :context ],
+      :void
+
+    # text methods
+    cairo_method :select_font_face,
+      [ :context, :font_family, :font_slant, :font_weight],
+      :void
+
+    cairo_method :set_font_size,
+      [ :context, :size ],
+      :void
+
+    cairo_method :set_font_matrix,
+      [ :context, :matrix ],
+      :void
+
+    cairo_method :get_font_matrix,
+      [ :context, :matrix ],
+      :void
+
+    cairo_method :set_font_options,
+      [ :context, :font_options],
+      :void
+
+    cairo_method :get_font_options,
+      [ :context, :font_options],
+      :void
+
+    cairo_method :get_font_face,
+      [ :context ],
+      :font_face
+
+    cairo_method :set_scaled_font,
+      [:context, :scaled_font],
+      :void
+
+    cairo_method :get_scaled_font,
+      [:context ],
+      :scaled_font
+
+    cairo_method :show_text,
+      [:context, :string ],
+      :void      
+
+    cairo_method :show_glyphs,
+      [:context, :glyphs, :num_glyphs],
+      :void
+
+    cairo_method :font_extents,
+      [ :context, :extents ],
+      :void
+
+    cairo_method :text_extents,
+      [ :context, :string, :extents ],
+      :void
+
+    cairo_method :glyph_extents,
+      [ :context, :glyphs, :num_glyphs, :extents ],
+      :void
+
+    cairo_method :toy_font_face_create,
+      [ :font_family, :font_slant, :font_weight ],
+      :font_face
+
+    cairo_method :toy_font_face_get_family,
+      [ :font_face ], 
+      :string
+
+    cairo_method :toy_font_face_get_slant,
+      [ :font_face ],
+      :font_slant
+
+    cairo_method :toy_font_face_get_weight,
+      [ :font_face ],
+      :font_weight
+
+    cairo_method :glyph_allocate,
+      [:num_glyphs],
+      :glyphs
+
+    cairo_method :glyph_free,
+      [:glyphs],
+      :void
+
+    cairo_method :text_cluster_allocate,
+      [:num_clusters],
+      :clusters
+
+    cairo_method :text_cluster_free,
+      [:clusters],
       :void
 
   end

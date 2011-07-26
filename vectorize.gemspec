@@ -5,8 +5,8 @@ require "vectorize/version"
 Gem::Specification.new do |s|
   s.name        = "vectorize"
   s.version     = Vectorize::VERSION
-  s.authors     = ["Mike Bethany", "Andy Lindeman"]
-  s.email       = ["mikbe.tk@gmail.com", "alindeman@gmail.com"]
+  s.authors     = ["Mike Bethany", "Andy Lindeman", "Mark Sim"]
+  s.email       = ["mikbe.tk@gmail.com", "alindeman@gmail.com", "mark@quarternotecoda.com"]
   s.homepage    = ""
   s.summary     = %q{A simple wrapper and facade for the Cairo Graphics library.}
   s.description = %q{Provides a one-to-one FFI wrapper for the Cairo Graphics library in addition to a facade to the API that greatly simplifies its usage.}
