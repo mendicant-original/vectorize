@@ -1,10 +1,10 @@
 module Vectorize
 
   def self.draw(options)
-    raise ArgumentError, 
+    raise ArgumentError,
       "must specify a basename and an array of formats to save" unless
       options[:basename] and options[:formats]
-    
+
     surface = make_surface(options)
 
     drawing = Drawing.new(surface)
@@ -16,47 +16,47 @@ module Vectorize
     ensure
       surface.destroy
     end
-    
+
   end
-  
-  private 
+
+  private
 
   def self.generate_filename(basename, format)
     "#{basename}.#{format}"
   end
-  
+
   def self.make_surface(options)
-    
+
     if options[:source]
       Surface::PNG.new(options[:source])
     elsif options[:formats].include?(:pdf)
-      raise ArgumentError, 
+      raise ArgumentError,
         "must specify a width and height for PDF output" unless
           options[:width] and options[:height]
-          
+
       Surface::PDF.new(
-        generate_filename(options[:basename], :pdf), 
-        options[:width], 
+        generate_filename(options[:basename], :pdf),
+        options[:width],
         options[:height]
       )
     elsif options[:formats].include?(:svg)
-      raise ArgumentError, 
+      raise ArgumentError,
         "must specify a width and height for SVG output" unless
           options[:width] and options[:height]
-          
+
       Surface::SVG.new(
-        generate_filename(options[:basename], :svg), 
-        options[:width], 
+        generate_filename(options[:basename], :svg),
+        options[:width],
         options[:height]
       )
     else
-      
-      raise ArgumentError, 
-        "must specify a width and height for new images" unless 
+
+      raise ArgumentError,
+        "must specify a width and height for new images" unless
           options[:width] and options[:height]
-          
+
       Surface::Image.new(options[:width], options[:height])
     end
   end
-  
+
 end

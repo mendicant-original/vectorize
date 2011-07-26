@@ -13,7 +13,7 @@ module Vectorize
       @path     = Path.new(@surface.context)
       @text     = Text.new(@surface.context)
     end
-    
+
   end
-  
+
 end
