@@ -8,20 +8,20 @@ module Vectorize
       @context = context
     end
     
-    def write(string, options={})
-      at = options[:upper_right] || Point.new(0, 0)
-      set_font(options[:font], options) if options[:font]
-      set_font_size(options[:size]) if options[:size]
+    def write(string, params={})
+      at = params.fetch(:upper_left, Point.new(0, 0))
+      set_font(params[:font], params) if params[:font]
+      set_font_size(params[:size]) if params[:size]
       Cairo.move_to(@context, at.x, at.y)
       Cairo.show_text(@context, string)
     end
 
-    def set_font(font, options={})
+    def set_font(font, params={})
       Cairo.select_font_face(
         @context, 
         font,
-        options[:slant] || :NORMAL,
-        options[:weight] || :NORMAL
+        params.fetch(:slant, :NORMAL)
+        params.fetch(:weight, :NORMAL)
       )
     end
 

@@ -12,8 +12,8 @@ describe Vectorize::Text do
         width:  100, 
         height: 100
       ) do |v|
-        v.write("Hello", [0, 40], :size => 30)
-        v.write("World!", [0, 80], :size => 35)
+        v.write("Hello", :upper_left => Point(0, 40), :size => 30)
+        v.write("World!", :upper_left => Point(0, 80), :size => 35)
       end
     end
 
@@ -27,7 +27,7 @@ describe Vectorize::Text do
       ) do |v|
         v.set_font("Arial")
         v.set_font_size(60)
-        v.write("Hello!", [0, 80])
+        v.write("Hello!", :upper_left => Point(0, 80))
       end
     end
 
@@ -40,7 +40,7 @@ describe Vectorize::Text do
       ) do |v|
         v.set_font("Arial", :weight => :NORMAL)
         v.set_font_size(60)
-        v.write("World", [0, 40], :font => "Helvetica", :weight => :BOLD, :size => 30)
+        v.write("World", :upper_left => Point(0, 80), :font => "Helvetica", :weight => :BOLD, :size => 30)
       end
     end
   end

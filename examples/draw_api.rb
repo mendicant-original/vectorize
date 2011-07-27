@@ -68,7 +68,7 @@ drawing_options = {
 }
 
 Vectorize.draw(drawing_options) do |v|
-   v.square upper_left: Vectorize.point(50, 50), side_size: 300
+  v.square upper_left: Vectorize.point(50, 50), side_size: 300
   v.stroke
 end
 
@@ -81,37 +81,43 @@ drawing_options = {
 }
 
 Vectorize.draw(drawing_options) do |v|
-   v.polygon center: Vectorize.point(200, 200), radius: 150, sides: 7
-   v.stroke
+  v.polygon center: Vectorize.point(200, 200), radius: 150, sides: 7
+  v.stroke
 end
 
 # draw some text
-Vectorize.draw(
+drawing_options = {
   :basename => "hello_world",
   :formats  => [:png],
   :width    => 400,
   :height   => 400
-  ) do |v|
-    v.write "Hello World", :upper_left => 0, 40
+}
+
+Vectorize.draw(drawing_options) do |v|
+  v.write "Hello World", :upper_left => 0, 40
 end
 
 # draw text in any font
-Vectorize.draw(
+drawing_options = {
   :basename => "hello_font",
   :formats  => [:png],
   :width    => 400,
   :height   => 400
-  ) do |v|
-    v.write "Helvetica World", :upper_left => 0, 40, :font => "Helvetica"
+}
+
+Vectorize.draw(drawing_options) do |v|
+  v.write "Helvetica World", :upper_left => 0, 40, :font => "Helvetica"
 end
 
 # specify the size
-Vectorize.draw(
+drawing_options = {
   :basename => "hello_font_size",
   :formats  => [:png],
   :width    => 400,
   :height   => 400
-  ) do |v|
-    v.write "Hello World", :upper_left => 0, 40, :font => "Helvetica", :size => 40
+}
+
+Vectorize.draw(drawing_options) do |v|
+  v.write "Hello World", :upper_left => 0, 40, :font => "Helvetica", :size => 40
 end
 
